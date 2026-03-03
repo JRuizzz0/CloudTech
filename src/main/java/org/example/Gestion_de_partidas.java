@@ -9,5 +9,5 @@ public class Gestion_de_partidas {
         public void añadirCatalogo() { }
         public String buscarJuegos() { return ""; }
         public void comprobarCatalogo() { }
-    }
 }
+
