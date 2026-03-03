@@ -7,10 +7,10 @@ public class Usuario {
     String correo;
     Plan plan;
 
-    public Usuario(String nombre_completo, String correo) {
+    public Usuario(String nombre_completo, String correo, Plan plan) {
         this.nombre_completo = nombre_completo;
         this.correo = correo;
-
+        this.plan = plan;
     }
 
     public String getNombre_completo() {

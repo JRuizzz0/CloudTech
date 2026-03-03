@@ -1,27 +1,13 @@
 package Suscripcion;
 
+import java.util.List;
+
 public abstract class Plan {
-    int velocidad;
-    int limite_de_partidas;
+    protected int velocidad;
+    protected int limiteDePart;
 
-    public Plan(int velocidad, int limite_de_partidas) {
-        this.velocidad = velocidad;
-        this.limite_de_partidas = limite_de_partidas;
-    }
-
-    public int getVelocidad() {
-        return velocidad;
-    }
-
-    public void setVelocidad(int velocidad) {
-        this.velocidad = velocidad;
-    }
-
-    public int getLimite_de_partidas() {
-        return limite_de_partidas;
-    }
-
-    public void setLimite_de_partidas(int limite_de_partidas) {
-        this.limite_de_partidas = limite_de_partidas;
-    }
+    protected int limiteVel;
+    protected int partidasSimul;
+    protected List<String> catalogo;
 }
+
