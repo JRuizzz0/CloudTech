@@ -1,3 +1,5 @@
+package org.example;
+
 import GestUsu.Usuario;
 import Suscripcion.Basic;
 import Suscripcion.Plan;
