@@ -1,11 +1,20 @@
 package Suscripcion;
 
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class Basic extends Plan {
+
     public Basic() {
-        this.catalogo = new ArrayList<>();
-        this.partidasSimul = 0;
-        this.limiteVel = 0;
+        super();
+
+        nombre = "Basic";
+        partidasSimul = 0;
+        catalogo = new ArrayList<>();
+        velocidad = 0;
+
+
     }
+
 }
