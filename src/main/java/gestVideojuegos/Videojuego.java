@@ -17,4 +17,20 @@ public class Videojuego {
         this.genero = genero;
         this.catalogo = new ArrayList<>();
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public int getVelocidadMin() {
+        return velocidadMin;
+    }
+
+    public Genero getGenero() {
+        return genero;
+    }
+
+    public List<String> getCatalogo() {
+        return catalogo;
+    }
 }

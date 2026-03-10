@@ -1,114 +1,72 @@
 package org.example;
 
-
 import GestUsu.Usuario;
-import Suscripcion.Advance;
-import Suscripcion.Basic;
-import Suscripcion.Plan;
-import Suscripcion.Premium;
-import recursos.MyScanner;
+import Suscripcion.*;
+import recursos.InvalidUsuarioException;
 
 import java.util.ArrayList;
 
 public class Gestion_de_usuarios {
-
-    MyScanner sc = new MyScanner();
-    ArrayList<Usuario> usuarios= new ArrayList<Usuario>();
-
-        public void cambiarPlan() {
-            String nombre = sc.pedirSoloTexto("Escribe el nombre-completo: ");
-            for (Usuario u : usuarios) {
-                if (u.getNombre_completo().equals(nombre)) {
-                    Plan plan = null;
-                    int numPlan = sc.pedirNumero("Ingresa el numero del plan: " +
-                            "1- Basic" +
-                            "2- Advance" +
-                            "3- Premium");
-
-                    if (numPlan == 1) {
-                        plan = new Basic();
-                    }else if (numPlan == 2) {
-                        plan = new Advance();
-                    }else if (numPlan == 3) {
-                        plan = new Premium();
-                    }else {
-                        System.out.println("No existe el plan");
-                    }
-                    u.setPlan(plan);
-                }
-            }
+    private ArrayList<Usuario> usuarios = new ArrayList<>();
 
 
-               }
-        public void consultarVelocidad() {
+    public boolean registrarUsuarios(String nombre, String correo, int numPlan) {
+        if (buscarUsuario(nombre) != null) return false;
+        Plan plan = asignarPlan(numPlan);
+        if (plan == null) return false;
 
-            String nombre = sc.pedirSoloTexto("Escribe el nombre-completo: ");
-            for (Usuario u : usuarios) {
-                if (u.getNombre_completo().equals(nombre)) {
-                    Plan plan = null;
-                    int numPlan = sc.pedirNumero("Ingresa el numero del plan: " +
-                            "1- Basic" +
-                            "2- Advance" +
-                            "3- Premium");
-
-                    if (numPlan == 1) {
-                        plan = new Basic();
-                    }else if (numPlan == 2) {
-                        plan = new Advance();
-                    }else if (numPlan == 3) {
-                        plan = new Premium();
-                    }else {
-                        System.out.println("No existe el plan");
-                    }
-
-                }
-            }
-
-
-              }
-        public void comprobarPlan() {
-
-            String nombre = sc.pedirSoloTexto("Escribe el nombre-completo: ");
-            for (Usuario u : usuarios) {
-                if (u.getNombre_completo().equals(nombre)) {
-                    u.getPlan();
-                }
-                else  {
-                    System.out.println("No existe el usuario");
-                }
-            }
-
-            }
-        public void registrarUsuarios() {
-           String nombre = sc.pedirSoloTexto("Ingresa el nombre completo: ");
-           String correo = sc.pideTexto("Ingresa el correo del usuario: ");
-
-            Plan plan = null;
-            int numPlan = sc.pedirNumero("Ingresa el numero del plan: " +
-                    "1- Basic" +
-                    "2- Advance" +
-                    "3- Premium");
-
-            if (numPlan == 1) {
-                plan = new Basic();
-            }else if (numPlan == 2) {
-                plan = new Advance();
-            }else if (numPlan == 3) {
-                plan = new Premium();
-            }else {
-                System.out.println("No existe el plan");
-            }
-
-            Usuario usuario = new Usuario(nombre,correo,plan);
-            System.out.println("El usuario se ha registrado correctamente" + usuario.getCorreo() + " " + usuario.getNombre_completo());
-
-
-            usuarios.add(usuario);
-        }
-        public void listarUsuarios(){
-            System.out.println((usuarios));
-
-        }
-        public String buscarUsuarios() {
-            return ""; }
+        return usuarios.add(new Usuario(nombre, correo, plan));
     }
+
+
+    public boolean cambiarPlan(String nombre, int nuevoNumPlan) {
+        Usuario u = buscarUsuario(nombre);
+        Plan nuevoPlan = asignarPlan(nuevoNumPlan);
+        if (u != null && nuevoPlan != null) {
+            u.setPlan(nuevoPlan);
+            return true;
+        }
+        return false;
+    }
+
+
+    public int consultarVelocidad(String nombre) throws InvalidUsuarioException {
+        Usuario u = buscarUsuario(nombre);
+        if (u == null) {
+            throw new InvalidUsuarioException("Error: El usuario '" + nombre + "' no existe.");
+        }
+        if (u.getPlan() == null) {
+            throw new InvalidUsuarioException("Error: El usuario no tiene un plan asignado.");
+        }
+        return u.getPlan().getVelocidad();
+    }
+
+
+    public boolean comprobarPlan(String nombre) {
+        Usuario u = buscarUsuario(nombre);
+        return (u != null && u.getPlan() != null);
+    }
+
+
+    public Usuario buscarUsuario(String nombre) {
+        for (Usuario u : usuarios) {
+            if (u.getNombre_completo().equalsIgnoreCase(nombre)) return u;
+        }
+        return null;
+    }
+
+
+    public ArrayList<Usuario> listarUsuarios() {
+        return this.usuarios;
+    }
+
+
+    private Plan asignarPlan(int opcion) {
+        return switch (opcion) {
+            case 1 -> new Basic();
+            case 2 -> new Advance();
+            case 3 -> new Premium();
+            default -> null;
+        };
+    }
+}
