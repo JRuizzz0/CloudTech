@@ -35,7 +35,7 @@ class Gestion_de_usuariosTest {
 
         int velocidad = gestor.consultarVelocidad("Ana");
 
-        assertEquals(100, velocidad);
+        assertEquals(500, velocidad);
     }
 
 
@@ -57,6 +57,7 @@ class Gestion_de_usuariosTest {
     void testComprobarPlan() {
         gestor.registrarUsuarios("Alex", "alex@gmail.com", 1);
         assertTrue(gestor.comprobarPlan("Alex"));
-        assertFalse(gestor.comprobarPlan("Fantasma"));
+        assertEquals(true,gestor.comprobarPlan("Alex"));
+        assertFalse(gestor.comprobarPlan("Raul"));
     }
 }

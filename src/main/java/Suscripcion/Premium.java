@@ -9,9 +9,9 @@ public class Premium extends Plan {
         super();
 
         nombre = "Premium";
-        partidasSimul = 0;
+        partidasSimul = 4;
         catalogo = new ArrayList<>();
-        velocidad = 0;
+        velocidad = 500;
 
     }
 

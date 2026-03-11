@@ -33,7 +33,7 @@ public class Gestion_de_usuarios {
     public int consultarVelocidad(String nombre) throws InvalidUsuarioException {
         Usuario u = buscarUsuario(nombre);
         if (u == null) {
-            throw new InvalidUsuarioException("Error: El usuario '" + nombre + "' no existe.");
+            throw new InvalidUsuarioException("Error: El usuario " + nombre + " no existe.");
         }
         if (u.getPlan() == null) {
             throw new InvalidUsuarioException("Error: El usuario no tiene un plan asignado.");
@@ -44,6 +44,7 @@ public class Gestion_de_usuarios {
 
     public boolean comprobarPlan(String nombre) {
         Usuario u = buscarUsuario(nombre);
+
         return (u != null && u.getPlan() != null);
     }
 

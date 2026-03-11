@@ -28,7 +28,7 @@ public class Gestion_de_partidas {
         throw new InvalidGameException("El videojuego '" + nombre + "' no existe en CloudTech.");
     }
 
-    public int getPartidas(String usuario) {
-        return numPartidasAct.getOrDefault(usuario, 0);
+    public int actualizarPartidas(String usuario) {
+        return numPartidasAct.get(usuario);
     }
 }

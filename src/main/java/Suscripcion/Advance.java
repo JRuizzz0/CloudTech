@@ -7,8 +7,8 @@ public class Advance extends Plan {
         public Advance() {
             super();
             catalogo = new ArrayList<>();
-            velocidad = 0;
-            partidasSimul = 0;
+            velocidad = 150;
+            partidasSimul = 2;
             nombre = "Advance";
 
         }

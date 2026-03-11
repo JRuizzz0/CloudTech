@@ -10,9 +10,9 @@ public class Basic extends Plan {
         super();
 
         nombre = "Basic";
-        partidasSimul = 0;
+        partidasSimul = 1;
         catalogo = new ArrayList<>();
-        velocidad = 0;
+        velocidad = 50;
 
 
     }
