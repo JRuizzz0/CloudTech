@@ -1,5 +1,7 @@
 package org.example;
 
+import GestUsu.Usuario;
+import Suscripcion.Basic;
 import gestVideojuegos.Videojuego;
 import org.junit.jupiter.api.Test;
 import recursos.Genero;
@@ -23,6 +25,11 @@ class Gestion_de_partidasTest {
 
     @Test
     void comprobarCatalogo() {
+        gestor_usuarios.registrarUsuarios("Ana","ana@gmail.com",1);
+        assertTrue(gestor.comprobarCatalogo("Ana"));
+        assertEquals(true,gestor.comprobarCatalogo("Alex"));
+        assertFalse(gestor.comprobarCatalogo("Raul"));
+
 
     }
 
@@ -33,8 +40,20 @@ class Gestion_de_partidasTest {
     }
 
     @Test
-    void actualizarPartidas() {
-        gestor_usuarios.registrarUsuarios("Ana","ana@gmail.com",2);
+    void ActualizarPartidas() {
 
+
+        Usuario nuevoUser = new Usuario("Lucas", "lucas@mail.com", new Basic());
+
+
+        int partidasIniciales = gestor.actualizarPartidas(nuevoUser);
+        assertEquals(0, partidasIniciales);
+
+
+        gestor.iniciarPartida(nuevoUser);
+
+
+        int partidasDespues = gestor.actualizarPartidas(nuevoUser);
+        assertEquals(1, partidasDespues);
     }
 }

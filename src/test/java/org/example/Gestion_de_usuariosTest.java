@@ -10,7 +10,7 @@ class Gestion_de_usuariosTest {
     Gestion_de_usuarios gestor = new Gestion_de_usuarios();
 
     @Test
-    void testRegistrarUsuario() {
+    void RegistrarUsuario() {
         boolean completo = gestor.registrarUsuarios("Ana", "ana@gmail.com", 1);
         assertTrue(completo);
         assertNotNull(gestor.buscarUsuario("Ana"));
@@ -18,7 +18,7 @@ class Gestion_de_usuariosTest {
 
 
     @Test
-    void testCambiarPlan() {
+    void CambiarPlan() {
         gestor.registrarUsuarios("Ana", "ana@gmail.com", 1);
 
 
@@ -29,7 +29,7 @@ class Gestion_de_usuariosTest {
     }
 
     @Test
-    void testConsultarVelocidad() {
+    void ConsultarVelocidad() {
         gestor.registrarUsuarios("Ana", "ana@gmail.com", 3);
 
 
@@ -41,7 +41,7 @@ class Gestion_de_usuariosTest {
 
 
     @Test
-    void testListarUsuarios() {
+    void ListarUsuarios() {
 
         gestor.registrarUsuarios("Usuario 1", "u1@gmail.com", 1);
         gestor.registrarUsuarios("Usuario 2", "u2@gmail.com", 2);
@@ -54,7 +54,7 @@ class Gestion_de_usuariosTest {
     }
 
     @Test
-    void testComprobarPlan() {
+    void ComprobarPlan() {
         gestor.registrarUsuarios("Alex", "alex@gmail.com", 1);
         assertTrue(gestor.comprobarPlan("Alex"));
         assertEquals(true,gestor.comprobarPlan("Alex"));
