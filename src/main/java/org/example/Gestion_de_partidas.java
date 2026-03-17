@@ -22,6 +22,7 @@ public class Gestion_de_partidas {
         }
         return listaJuegos.add(juego);
     }
+
     public boolean comprobarCatalogo(String nombre) {
         Usuario u = gestion_de_usuarios.buscarUsuario(nombre);
 
@@ -29,15 +30,22 @@ public class Gestion_de_partidas {
     }
 
     public boolean iniciarPartida(Usuario usuario) {
-        int partidasActivas = 0;
         if (usuario == null) {
-            throw new InvalidUsuarioException("No se puede iniciar un partida debido al usuario");
-        }else {
-
-            numPartidasAct.put(usuario.getNombre_completo(), partidasActivas++);
-
+            throw new InvalidUsuarioException("No se puede iniciar partida: el usuario es nulo.");
         }
-        return numPartidasAct.isEmpty();
+
+        String nombre = usuario.getNombre_completo();
+
+
+        if (numPartidasAct.containsKey(nombre)) {
+
+            int actuales = numPartidasAct.get(nombre);
+            numPartidasAct.put(nombre, actuales + 1);
+        } else {
+            numPartidasAct.put(nombre, 1);
+        }
+
+        return true;
     }
 
     public Videojuego buscarJuego(String nombre) throws InvalidGameException {
@@ -48,7 +56,18 @@ public class Gestion_de_partidas {
     }
 
     public int actualizarPartidas(Usuario usuario) {
+        if (usuario == null) {
+            throw new InvalidUsuarioException("No se puede consultar: el usuario es nulo.");
+        }
 
-        return numPartidasAct.get(usuario);
+        String nombre = usuario.getNombre_completo();
+
+        Integer valor = numPartidasAct.get(nombre);
+
+        if (valor == null) {
+            return 0;
+        }
+
+        return valor;
     }
 }

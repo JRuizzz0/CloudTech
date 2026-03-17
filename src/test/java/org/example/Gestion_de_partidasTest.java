@@ -4,56 +4,59 @@ import GestUsu.Usuario;
 import Suscripcion.Basic;
 import gestVideojuegos.Videojuego;
 import org.junit.jupiter.api.Test;
-import recursos.Genero;
-
-import java.util.ArrayList;
+import recursos.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class Gestion_de_partidasTest {
 
     Gestion_de_partidas gestor = new Gestion_de_partidas();
-    Gestion_de_usuarios gestor_usuarios = new Gestion_de_usuarios();
 
     @Test
     void añadirCatalogo() {
-        ArrayList<Videojuego> listaJuegos = new ArrayList<>();
-        gestor.añadirAlCatalogo(new Videojuego("Zelda",200,Genero.RPG));
-        listaJuegos.add(new Videojuego("Zelda",200,Genero.RPG));
-        assertEquals(1,listaJuegos.size());
+
+        Videojuego v = new Videojuego("Zelda", 200, Genero.RPG);
+        assertTrue(gestor.añadirAlCatalogo(v));
+
+
+        assertThrows(InvalidCatalogoException.class, () -> {
+            gestor.añadirAlCatalogo(null);
+        });
     }
 
     @Test
     void comprobarCatalogo() {
-        gestor_usuarios.registrarUsuarios("Ana","ana@gmail.com",1);
+        gestor.gestion_de_usuarios.registrarUsuarios("Ana", "ana@gmail.com", 1);
         assertTrue(gestor.comprobarCatalogo("Ana"));
-        assertEquals(true,gestor.comprobarCatalogo("Alex"));
         assertFalse(gestor.comprobarCatalogo("Raul"));
-
-
     }
 
     @Test
     void buscarJuegos() {
-        gestor.añadirAlCatalogo(new Videojuego("Zelda",200,Genero.RPG));
-        assertNotNull(gestor.buscarJuego(("Zelda")));
+        gestor.añadirAlCatalogo(new Videojuego("Zelda", 200, Genero.RPG));
+        assertDoesNotThrow(() -> gestor.buscarJuego("Zelda"));
+        assertThrows(InvalidGameException.class, () -> {
+            gestor.buscarJuego("Mario");
+        });
     }
 
     @Test
-    void ActualizarPartidas() {
+    void iniciarPartida() {
+        Usuario u = new Usuario("Lucas", "l@gmail.com", new Basic());
 
+        gestor.iniciarPartida(u);
+        assertEquals(1, gestor.actualizarPartidas(u));
+        assertThrows(InvalidUsuarioException.class, () -> {
+            gestor.iniciarPartida(null);
+        });
+    }
 
-        Usuario nuevoUser = new Usuario("Lucas", "lucas@mail.com", new Basic());
-
-
-        int partidasIniciales = gestor.actualizarPartidas(nuevoUser);
-        assertEquals(0, partidasIniciales);
-
-
-        gestor.iniciarPartida(nuevoUser);
-
-
-        int partidasDespues = gestor.actualizarPartidas(nuevoUser);
-        assertEquals(1, partidasDespues);
+    @Test
+    void actualizarPartidas() {
+        Usuario u = new Usuario("Pepe", "p@gmail.com", new Basic());
+        assertEquals(0, gestor.actualizarPartidas(u));
+        assertThrows(InvalidUsuarioException.class, () -> {
+            gestor.actualizarPartidas(null);
+        });
     }
 }

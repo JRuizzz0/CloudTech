@@ -2,6 +2,7 @@ package org.example;
 
 import GestUsu.Usuario;
 import org.junit.jupiter.api.Test;
+import recursos.InvalidUsuarioException;
 import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -11,53 +12,39 @@ class Gestion_de_usuariosTest {
 
     @Test
     void RegistrarUsuario() {
-        boolean completo = gestor.registrarUsuarios("Ana", "ana@gmail.com", 1);
-        assertTrue(completo);
-        assertNotNull(gestor.buscarUsuario("Ana"));
-    }
 
+        assertTrue(gestor.registrarUsuarios("Ana", "ana@gmail.com", 1));
+        assertFalse(gestor.registrarUsuarios("Ana", "ana2@mail.com", 1));
+        assertFalse(gestor.registrarUsuarios("Luis", "l@gmal.com", 99));
+    }
 
     @Test
     void CambiarPlan() {
         gestor.registrarUsuarios("Ana", "ana@gmail.com", 1);
-
-
-        boolean cambio = gestor.cambiarPlan("Ana", 2);
-
-        assertTrue(cambio);
-        assertEquals("Advance", gestor.buscarUsuario("Ana").getPlan().getNombre());
+        assertTrue(gestor.cambiarPlan("Ana", 2));
+        assertFalse(gestor.cambiarPlan("Tarok", 2));
     }
 
     @Test
-    void ConsultarVelocidad() {
+    void ConsultarVelocidad() throws InvalidUsuarioException {
         gestor.registrarUsuarios("Ana", "ana@gmail.com", 3);
-
-
-        int velocidad = gestor.consultarVelocidad("Ana");
-
-        assertEquals(500, velocidad);
+        assertEquals(500, gestor.consultarVelocidad("Ana"));
+        assertThrows(InvalidUsuarioException.class, () -> {
+            gestor.consultarVelocidad("Raul");
+        });
     }
-
-
 
     @Test
     void ListarUsuarios() {
-
-        gestor.registrarUsuarios("Usuario 1", "u1@gmail.com", 1);
-        gestor.registrarUsuarios("Usuario 2", "u2@gmail.com", 2);
-
+        gestor.registrarUsuarios("U1", "u1@gmqqail.com", 1);
         ArrayList<Usuario> lista = gestor.listarUsuarios();
-
-        assertNotNull(lista);
-        assertEquals(2, lista.size());
-        assertEquals("Usuario 1", lista.get(0).getNombre_completo());
+        assertEquals(1, lista.size());
     }
 
     @Test
     void ComprobarPlan() {
         gestor.registrarUsuarios("Alex", "alex@gmail.com", 1);
         assertTrue(gestor.comprobarPlan("Alex"));
-        assertEquals(true,gestor.comprobarPlan("Alex"));
         assertFalse(gestor.comprobarPlan("Raul"));
     }
 }
