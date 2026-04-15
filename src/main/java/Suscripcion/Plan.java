@@ -1,5 +1,6 @@
 package Suscripcion;
 
+//clase plan
 import java.util.ArrayList;
 import java.util.List;
 

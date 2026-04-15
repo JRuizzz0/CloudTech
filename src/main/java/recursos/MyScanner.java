@@ -1,5 +1,5 @@
 package recursos;
-
+//Clase my scanner
 import java.util.InputMismatchException;
 import java.util.Scanner;
 

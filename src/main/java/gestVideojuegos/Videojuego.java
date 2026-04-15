@@ -5,6 +5,7 @@ import recursos.Genero;
 import java.util.ArrayList;
 import java.util.List;
 
+//Clase videojuego
 public class Videojuego {
     private String nombre;
     private int velocidadMin;

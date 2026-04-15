@@ -2,6 +2,7 @@ package GestUsu;
 
 import Suscripcion.Plan;
 
+//Clase usuario
 public class Usuario {
     String nombre_completo;
     String correo;

@@ -10,7 +10,7 @@ import recursos.InvalidUsuarioException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
+//Clase gestion partidas
 public class Gestion_de_partidas {
     private Map<String, Integer> numPartidasAct = new HashMap<>();
     private ArrayList<Videojuego> listaJuegos = new ArrayList<>();
