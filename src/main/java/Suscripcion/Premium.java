@@ -1,6 +1,6 @@
 package Suscripcion;
 
-
+//plan premium
 import java.util.ArrayList;
 
 public class Premium extends Plan {

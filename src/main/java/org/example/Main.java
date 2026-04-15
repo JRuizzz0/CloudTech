@@ -1,6 +1,6 @@
 package org.example;
 import recursos.*;
-
+//Clase main
 public class Main {
     public static void main(String[] args) {
         MyScanner sc = new MyScanner();

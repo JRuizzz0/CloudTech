@@ -1,7 +1,7 @@
 package Suscripcion;
 
 import java.util.ArrayList;
-
+//Plan advance
 
 public class Advance extends Plan {
         public Advance() {

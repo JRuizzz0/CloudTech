@@ -1,6 +1,6 @@
 package Suscripcion;
 
-
+//Plan basic
 import java.util.ArrayList;
 import java.util.List;
 

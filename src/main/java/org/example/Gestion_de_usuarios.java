@@ -5,7 +5,7 @@ import Suscripcion.*;
 import recursos.InvalidUsuarioException;
 
 import java.util.ArrayList;
-
+//Clase gestion de usuarios
 public class Gestion_de_usuarios {
     private ArrayList<Usuario> usuarios = new ArrayList<>();
 
